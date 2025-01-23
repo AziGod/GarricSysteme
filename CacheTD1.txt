@@ -1,0 +1,52 @@
+Quelle est la capacité du cache ?
+-512 octets
+
+------------------------------------------------------------
+
+Quel est le nombre de bits nécessaires pour décrire une adresse de la mémoire
+principale ?
+-1 Go = 1073741824 octets
+-Nombre de bits=log2​(1073741824)=30 bits
+-30 bits pour une adresse de la RAM
+
+------------------------------------------------------------
+
+Calculer le nombre de bits pour les champs Etiquette, Ligne et Deplacement de
+l'adresse d'un mot de la mémoire principale ?
+-un bloc = 16 octets donc log2​(16)=4 bits pour le déplacement
+-cache contient 32 lignes donc log2​(32)=5 bits pour la ligne
+-etiquette = restant soit 30-4-5=21 bits pour l'etiquette
+
+------------------------------------------------------------
+
+Le cache est initialement vide. Le processeur lit 64 octets à partir des adresses
+0, 1, 2,..,63 dans cet ordre.
+Décrire le contenu du cache après lecture des 64 octets?
+-64 octets donc 4 blocs sont nécessaires (4 blocs * 16 octets = 64 octets)
+-Comme le cache est vide, il va remplir les 4 lignes (1 ligne = 1 bloc) à la suite
+-soit:
+-Ligne 0 : Bloc de mémoire [0-15]
+-Ligne 1 : Bloc de mémoire [16-31]
+-Ligne 2 : Bloc de mémoire [32-47]
+-Ligne 3 : Bloc de mémoire [48-63]
+
+Donner le temps nécessare à la lecture des 64 octets ?
+-64 accès au cache soit 64ns
+-4 miss car au début les 4 lignes sont vides, 1 miss = 1 accès RAM soit 4*10ns=40ns
+-temps nécessaire = accès cache + accès RAM = 64 + 40 = 104ns
+
+------------------------------------------------------------
+Le cache est initialement vide. Le processeur lit les octets contenus aux adresses 0, 512, 1024, 512, 0. (Aide 512=16*32)
+Décrire l'évolution du cache lors de la lecture de ces 5 octets ?
+-Adresse 0 : correspond à un bloc de mémoire contenant les adresses 0 à 15.
+-Adresse 512 : correspond à un bloc de mémoire contenant les adresses 512 à 527.
+-Adresse 1024 : correspond à un bloc de mémoire contenant les adresses 1024 à 1039.
+-Adresse 512 (répétée) : correspond à un bloc de mémoire contenant les adresses 512 à 527.
+-Adresse 0 (répétée) : correspond à un bloc de mémoire contenant les adresses 0 à 15.
+
+---Déroulement de l'évolution du cache---
+-Adresse 0 = miss car vide, bloc (0 à 15) va se placer dans la ligne 0
+-Adresse 512 = miss, bloc contenant adresses 512-527
+
+Donner le temps nécessaire à la lecture de ces 5 octets ?
+-
