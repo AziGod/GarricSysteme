@@ -34,7 +34,7 @@ public class Voiture extends Thread {
 
         int tempsAttente = ThreadLocalRandom.current().nextInt(1000, 5000);
 
-        synchronized (parking) { // Protection contre les accès concurrents
+        synchronized (parking.places) { // Protection contre les accès concurrents
             if (parking.nbPlacesOccupees == parking.nbPlaces) {
 
                 fenetre.setEtat("J'attends une place");
@@ -76,13 +76,12 @@ public class Voiture extends Thread {
     }
 
     public void sortirDuParking() {
-        synchronized (parking) {
-            for (int i = 0; i < parking.nbPlaces; i++) {
-                if (parking.places[i] == this) {
-                    parking.places[i] = null; // Vide la place correctement
-                    parking.nbPlacesOccupees--;
-                    break;
-                }
+
+        for (int i = 0; i < parking.nbPlaces; i++) {
+            if (parking.places[i] == this) {
+                parking.places[i] = null; // Vide la place correctement
+                parking.nbPlacesOccupees--;
+                break;
             }
         }
     }
